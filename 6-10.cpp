@@ -50,3 +50,38 @@ public:
 //         return f[m-1][n-1];
 //     }
 // };
+
+
+class Solution {
+public:
+    int f[220][220];
+
+    int minPathSum(vector<vector<int>>& grid) 
+    {
+        int m=grid.size();
+        int n=grid[0].size();
+
+        f[0][0]=grid[0][0];
+        // for(int i=0;i<m;i++)
+        // {
+        //     f[i][0]=100000;
+        // }
+
+        // for(int i=0;i<n;i++)
+        // {
+        //     f[0][i]=100000;
+        // }
+
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(i-1>=0&&j-1>=0) f[i][j]=min(f[i-1][j],f[i][j-1])+grid[i][j];
+                else if(i-1>=0) f[i][j]=f[i-1][j]+grid[i][j];
+                else if(j-1>=0) f[i][j]=f[i][j-1]+grid[i][j];
+            }
+        }
+        
+        return f[m-1][n-1];
+    }
+};
